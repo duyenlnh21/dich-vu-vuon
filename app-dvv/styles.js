@@ -8,18 +8,16 @@ export default StyleSheet.create({
     backgroundColor: "ghostwhite"
   },
 
-  text: {
-    fontSize: 20,
-    textAlign: "center"
+  button: {
+    padding: 10,
+    margin: 5,
+    backgroundColor: "blue",
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: "slategrey"
   },
 
-  scroll: {
-    height: 1,
-    alignSelf: "stretch"
-  },
-
-  scrollItem: {
-    margin: 20,
-    alignSelf: "center"
+  buttonText: {
+    color: "white"
   }
 });
