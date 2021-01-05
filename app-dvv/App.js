@@ -1,32 +1,42 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { View, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Picker, FlatList, Text } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
+import iconNames from "./icon-names.json";
 
-export default function App({ reactSource, relaySource }) {
+export default function RenderingIcons() {
+  const [selected, setSelected] = useState("Web Application Icons");
+  const [listSource, setListSource] = useState([]);
+  const categories = Object.keys(iconNames);
+
+  function updateListSource(selected) {
+    setListSource(iconNames[selected]);
+    setSelected(selected);
+  }
+
+  useEffect(() => {
+    updateListSource(selected);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={reactSource} />
-      <Image style={styles.image} source={relaySource} />
+      <View style={styles.picker}>
+        <Picker selectedValue={selected} onValueChange={updateListSource}>
+          {categories.map(category => (
+            <Picker.Item key={category} label={category} value={category} />
+          ))}
+        </Picker>
+      </View>
+      <FlatList
+        style={styles.icons}
+        data={listSource.map((value, key) => ({ key: key.toString(), value }))}
+        renderItem={({ item }) => (
+          <View style={styles.item}>
+            <Icon name={item.value} style={styles.itemIcon} />
+            <Text style={styles.itemText}>{item.value}</Text>
+          </View>
+        )}
+      />
     </View>
   );
 }
-
-const sourceProp = PropTypes.oneOfType([
-  PropTypes.shape({
-    uri: PropTypes.string.isRequired
-  }),
-  PropTypes.number
-]).isRequired;
-
-App.propTypes = {
-  reactSource: sourceProp,
-  relaySource: sourceProp
-};
-
-App.defaultProps = {
-  reactSource: {
-    uri: "https://facebook.github.io/react-native/docs/assets/favicon.png"
-  },
-  relaySource: require("./images/relay.png")
-};
