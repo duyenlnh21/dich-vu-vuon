@@ -3,36 +3,23 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: "ghostwhite"
   },
 
-  swipeContainer: {
-    flex: 1,
-    flexDirection: "row",
-    width: 200,
-    height: 30,
-    marginTop: 50
+  text: {
+    fontSize: 20,
+    textAlign: "center"
   },
 
-  swipeItem: {
-    width: 200,
-    height: 30,
-    backgroundColor: "azure",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: "slategrey"
+  scroll: {
+    height: 1,
+    alignSelf: "stretch"
   },
 
-  swipeItemText: {
-    textAlign: "center",
-    color: "slategrey"
-  },
-
-  swipeBlank: {
-    width: 200,
-    height: 30
+  scrollItem: {
+    margin: 20,
+    alignSelf: "center"
   }
 });

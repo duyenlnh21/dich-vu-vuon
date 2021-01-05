@@ -1,24 +1,26 @@
-import React, { useState } from "react";
-import { View } from "react-native";
+import React from "react";
+import {
+  Text,
+  ScrollView,
+  ActivityIndicator,
+  Switch,
+  View
+} from "react-native";
+
 import styles from "./styles";
-import Swipeable from "./Swipeable";
 
-export default function SwipableAndCancellable() {
-  const [items, setItems] = useState(
-    new Array(6).fill(null).map((v, id) => ({ id, name: "Swipe Me" }))
-  );
-
-  function onSwipe(id) {
-    return () => {
-      setItems(items.filter(item => item.id !== id));
-    };
-  }
-
+export default function App() {
   return (
     <View style={styles.container}>
-      {items.map(item => (
-        <Swipeable key={item.id} onSwipe={onSwipe(item.id)} name={item.name} />
-      ))}
+      <ScrollView style={styles.scroll}>
+        {new Array(6).fill(null).map((v, i) => (
+          <View key={i}>
+            <Text style={[styles.scrollItem, styles.text]}>Wifi</Text>
+            <ActivityIndicator style={styles.scrollItem} size="large" />
+            <Switch style={styles.scrollItem} />
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
