@@ -8,16 +8,9 @@ export default StyleSheet.create({
     backgroundColor: "ghostwhite"
   },
 
-  button: {
-    padding: 10,
-    margin: 5,
-    backgroundColor: "blue",
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: "slategrey"
-  },
-
-  buttonText: {
-    color: "white"
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20
   }
 });
