@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import DatePicker from "./DatePicker";
-import TimePicker from "./TimePicker";
 import styles from "./styles";
+import Swipeable from "./Swipeable";
 
-export default function CollectingDateTimeInput() {
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
+export default function SwipableAndCancellable() {
+  const [items, setItems] = useState(
+    new Array(6).fill(null).map((v, id) => ({ id, name: "Swipe Me" }))
+  );
 
-  
+  function onSwipe(id) {
+    return () => {
+      setItems(items.filter(item => item.id !== id));
+    };
+  }
+
   return (
     <View style={styles.container}>
-      <DatePicker
-        label="Pick a date, any date:"
-        date={date}
-        onDateChange={setDate}
-      />
-      <TimePicker
-        label="Pick a time, any time:"
-        date={time}
-        onTimeChange={setTime}
-      />
+      {items.map(item => (
+        <Swipeable key={item.id} onSwipe={onSwipe(item.id)} name={item.name} />
+      ))}
     </View>
   );
 }
