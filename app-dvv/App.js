@@ -1,42 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { View, Picker, FlatList, Text } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { Text, View } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 import styles from "./styles";
-import iconNames from "./icon-names.json";
 
-export default function RenderingIcons() {
-  const [selected, setSelected] = useState("Web Application Icons");
-  const [listSource, setListSource] = useState([]);
-  const categories = Object.keys(iconNames);
+const connectedMap = {
+  none: "Disconnected",
+  unknown: "Disconnected",
+  wifi: "Connected",
+  cell: "Connected",
+  mobile: "Connected"
+};
 
-  function updateListSource(selected) {
-    setListSource(iconNames[selected]);
-    setSelected(selected);
-  }
+export default function App() {
+  const [connected, setConnected] = useState("");
 
   useEffect(() => {
-    updateListSource(selected);
+    function onNetworkChange(connection) {
+      setConnected(connectedMap[connection.type]);
+    }
+
+    const unsubscribe = NetInfo.addEventListener(onNetworkChange);
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
     <View style={styles.container}>
-      <View style={styles.picker}>
-        <Picker selectedValue={selected} onValueChange={updateListSource}>
-          {categories.map(category => (
-            <Picker.Item key={category} label={category} value={category} />
-          ))}
-        </Picker>
-      </View>
-      <FlatList
-        style={styles.icons}
-        data={listSource.map((value, key) => ({ key: key.toString(), value }))}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Icon name={item.value} style={styles.itemIcon} />
-            <Text style={styles.itemText}>{item.value}</Text>
-          </View>
-        )}
-      />
+      <Text>{connected}</Text>
     </View>
   );
 }

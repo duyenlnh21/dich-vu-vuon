@@ -3,32 +3,18 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "ghostwhite"
+    backgroundColor: "#F5FCFF"
   },
-
-  picker: {
-    height: 200,
-    width: 200,
-    marginTop: 20
+  welcome: {
+    fontSize: 20,
+    textAlign: "center",
+    margin: 10
   },
-
-  icons: {
-    alignSelf: "stretch"
-  },
-
-  item: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center"
-  },
-
-  itemIcon: {
-    padding: 10,
-    color: "slategrey"
-  },
-
-  itemText: {
-    color: "slategrey"
+  instructions: {
+    textAlign: "center",
+    color: "#333333",
+    marginBottom: 5
   }
 });
