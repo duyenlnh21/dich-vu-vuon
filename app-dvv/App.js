@@ -1,11 +1,22 @@
-import React from "react";
-import { Text } from "native-base";
-import Container from "./Container";
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import Home from "./Home";
+import Settings from "./Settings";
+import Help from "./Help";
+import Contact from "./Contact";
 
-export default function App({ navigation }) {
-  return (
-    <Container title="Tiêu đề trang">
-      <Text>Nội dung trang </Text>
-    </Container>
-  );
-}
+const AppNavigator = createStackNavigator(
+  {
+    Home,
+    Settings,
+    Help,
+    Contact
+  },
+  {
+    defaultNavigationOptions: {
+      headerShown: false
+    }
+  }
+);
+
+export default createAppContainer(AppNavigator);
